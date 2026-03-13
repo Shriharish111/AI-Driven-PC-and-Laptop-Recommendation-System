@@ -42,6 +42,7 @@ Structure the output in clean HTML using:
 Return only HTML.
 """
 
+<<<<<<< HEAD
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash-lite",
@@ -51,6 +52,14 @@ Return only HTML.
     except Exception as e:
         print(f"Gemini API Error: {e}")
         return "<h3>AI Explanation Unavailable</h3><p>The AI recommendation builder is currently experiencing high traffic (API Quota Exceeded). Please review the specifications listed above.</p>"
+=======
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
+
+    return response.text
+>>>>>>> cbaf88eeccab7035ba187e9935cf6d647a5d308c
 
 
 
@@ -91,6 +100,7 @@ Be realistic about laptop thermals and sustained performance.
 Return only valid HTML.
 """
 
+<<<<<<< HEAD
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash-lite",
@@ -100,4 +110,12 @@ Return only valid HTML.
     except Exception as e:
         print(f"Gemini API Error: {e}")
         return "<h3>AI Explanation Unavailable</h3><p>The AI recommendation builder is currently experiencing high traffic (API Quota Exceeded). Please review the specifications listed above.</p>"
+=======
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
+
+    return response.text
+>>>>>>> cbaf88eeccab7035ba187e9935cf6d647a5d308c
 
