@@ -1,0 +1,6 @@
+{
+  "category": "pc",
+  "min_budget": 50000,
+  "max_budget": 100000,
+  "use_case": "gaming"
+}
