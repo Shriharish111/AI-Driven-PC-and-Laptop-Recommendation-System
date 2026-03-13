@@ -1,27 +1,12 @@
-<<<<<<< HEAD
 import os
 from dotenv import load_dotenv
 load_dotenv()
 from flask import Flask, app
 from config import Config
 from extensions import db
-=======
-from flask import Flask, app
-from config import Config
-from extensions import db
-import os
->>>>>>> cbaf88eeccab7035ba187e9935cf6d647a5d308c
 from utils.language import translate
 
 os.environ["LOKY_MAX_CPU_COUNT"] = "4"
-
-<<<<<<< HEAD
-=======
-import os
-from flask import Flask
-from extensions import db
-
->>>>>>> cbaf88eeccab7035ba187e9935cf6d647a5d308c
 def create_app():
     app = Flask(__name__)
 
@@ -32,8 +17,6 @@ def create_app():
 
     app.config["SQLALCHEMY_DATABASE_URI"] = database_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-<<<<<<< HEAD
-    
     # Needs a secret key for session management
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "fallback_secret_key")
 
@@ -65,23 +48,3 @@ app = create_app()
 
 if __name__ == "__main__":
     app.run(debug=True)
-=======
-
-    db.init_app(app)
-
-    # run seed_all automatically
-    with app.app_context():
-        try:
-            db.create_all()
-            import seed_all
-        except Exception as e:
-            print("Seed skipped:", e)
-
-    return app
-
-
-app = create_app()
-
-if __name__ == "__main__":
-    app.run(debug=True)
->>>>>>> cbaf88eeccab7035ba187e9935cf6d647a5d308c
