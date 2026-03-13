@@ -1,9 +1,14 @@
-import os
-from flask import Flask
+from flask import Flask, app
+from config import Config
 from extensions import db
+import os
+from utils.language import translate
 
 os.environ["LOKY_MAX_CPU_COUNT"] = "4"
 
+import os
+from flask import Flask
+from extensions import db
 
 def create_app():
     app = Flask(__name__)
@@ -18,21 +23,13 @@ def create_app():
 
     db.init_app(app)
 
+    # run seed_all automatically
     with app.app_context():
-        db.create_all()
-
-        # Run seed script
         try:
+            db.create_all()
             import seed_all
         except Exception as e:
             print("Seed skipped:", e)
-
-    # register routes
-    from routes.main_routes import main_bp
-    from routes.auth_routes import auth_bp
-
-    app.register_blueprint(main_bp)
-    app.register_blueprint(auth_bp)
 
     return app
 
@@ -40,5 +37,4 @@ def create_app():
 app = create_app()
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
