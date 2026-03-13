@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-container">
+<div class="glass-box">
+
+<h1 class="hero-title" style="font-size:32px;">
+{{ t("Recommended Systems") }}
+</h1>
+
+{% if metrics %}
+<div class="build-card" style="margin-bottom:35px;">
+
+<div class="build-header">
+AI Clustering Summary
+</div>
+
+<div class="build-specs">
+<div><strong>Total Items Clustered:</strong> {{ metrics.total_builds_clustered or metrics.total_laptops_clustered }}</div>
+<div><strong>Clusters:</strong> {{ metrics.clusters }}</div>
+<div><strong>Inertia:</strong> {{ metrics.inertia }}</div>
+<div><strong>Silhouette Score:</strong> {{ metrics.silhouette_score }}</div>
+</div>
+
+</div>
+{% endif %}
+
+{% for item in results %}
+
+<div class="build-card">
+
+<div class="build-header">
+{{ item.type }} Recommendation {{ loop.index }}
+</div>
+
+<div class="build-specs">
+
+{% if item.type == "PC" %}
+
+<div>
+<strong>CPU:</strong> {{ item.cpu }}
+{% if item.cpu_link %}
+<a href="{{ item.cpu_link }}" target="_blank">
+<button class="cyber-btn-small">Buy</button>
+</a>
+{% endif %}
+</div>
+
+<div>
+<strong>Motherboard:</strong> {{ item.motherboard }}
+{% if item.motherboard_link %}
+<a href="{{ item.motherboard_link }}" target="_blank">
+<button class="cyber-btn-small">Buy</button>
+</a>
+{% endif %}
+</div>
+
+<div>
+<strong>GPU:</strong> {{ item.gpu }}
+{% if item.gpu_link %}
+<a href="{{ item.gpu_link }}" target="_blank">
+<button class="cyber-btn-small">Buy</button>
+</a>
+{% endif %}
+</div>
+
+<div>
+<strong>RAM:</strong> {{ item.ram }}
+{% if item.ram_link %}
+<a href="{{ item.ram_link }}" target="_blank">
+<button class="cyber-btn-small">Buy</button>
+</a>
+{% endif %}
+</div>
+
+<div>
+<strong>SSD:</strong> {{ item.ssd }}
+{% if item.ssd_link %}
+<a href="{{ item.ssd_link }}" target="_blank">
+<button class="cyber-btn-small">Buy</button>
+</a>
+{% endif %}
+</div>
+
+<div>
+<strong>PSU:</strong> {{ item.psu }}
+{% if item.psu_link %}
+<a href="{{ item.psu_link }}" target="_blank">
+<button class="cyber-btn-small">Buy</button>
+</a>
+{% endif %}
+</div>
+
+<hr>
+
+<div>
+<strong>Total Build Price:</strong>
+<span style="font-size:20px;color:#00ffd5;">
+₹{{ item.total_price }}
+</span>
+</div>
+
+<div>
+<strong>Bottleneck:</strong>
+{{ item.bottleneck_type }}
+({{ item.bottleneck_percentage }}%)
+</div>
+
+{% else %}
+
+<div>
+<strong>Laptop:</strong> {{ item.name }}
+</div>
+
+<div>
+<strong>RAM:</strong> {{ item.ram }}
+</div>
+
+<div>
+<strong>Storage:</strong> {{ item.storage }} GB
+</div>
+
+<div>
+<strong>Price:</strong>
+<span style="font-size:20px;color:#00ffd5;">
+₹{{ item.price }}
+</span>
+</div>
+
+{% if item.laptop_link %}
+<a href="{{ item.laptop_link }}" target="_blank">
+<button class="cyber-btn-small">
+Buy on Amazon
+</button>
+</a>
+{% endif %}
+
+{% endif %}
+
+{% if item.cluster is defined %}
+<div style="margin-top:10px;">
+<strong>Cluster ID:</strong> {{ item.cluster }}
+</div>
+{% endif %}
+
+{% if item.cluster_summary %}
+<div style="margin-top:8px;font-size:14px;opacity:0.9;">
+
+<div>
+<strong>Cluster Avg Price:</strong>
+₹{{ item.cluster_summary.avg_price }}
+</div>
+
+{% if item.cluster_summary.avg_performance %}
+<div>
+<strong>Cluster Avg Performance:</strong>
+{{ item.cluster_summary.avg_performance }}
+</div>
+{% endif %}
+
+{% if item.cluster_summary.avg_cpu_score %}
+<div>
+<strong>Cluster Avg CPU Score:</strong>
+{{ item.cluster_summary.avg_cpu_score }}
+</div>
+{% endif %}
+
+{% if item.cluster_summary.avg_gpu_score %}
+<div>
+<strong>Cluster Avg GPU Score:</strong>
+{{ item.cluster_summary.avg_gpu_score }}
+</div>
+{% endif %}
+
+</div>
+{% endif %}
+
+</div>
+
+<div class="explanation">
+
+<h4 style="margin-top:15px;color:#ff0080;">
+{{ t("Performance Explanation") }}
+</h4>
+
+{{ item.explanation | safe }}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+<div style="margin-top:40px;">
+<a href="/">
+<button class="cyber-btn">
+{{ t("Recommend Again") }}
+</button>
+</a>
+</div>
+
+</div>
+</div>
+
+{% endblock %}

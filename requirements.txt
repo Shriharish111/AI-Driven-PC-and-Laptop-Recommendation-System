@@ -1,0 +1,14 @@
+Flask
+Flask-SQLAlchemy
+
+python-dotenv
+
+numpy
+pandas
+scikit-learn
+
+google-genai
+requests
+gunicorn
+
+Authlib

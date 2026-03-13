@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-container">
+    <div class="glass-box">
+
+        <h2 class="hero-title" style="font-size:28px;">
+            Select Use Case
+        </h2>
+
+        <div class="option-button" onclick="startLoading('Gaming')">
+            🎮 {{ t("Gaming") }}
+        </div>
+
+        <div class="option-button" onclick="startLoading('Video Editing')">
+            🎬 {{ t("Video Editing") }}
+        </div>
+
+        <div class="option-button" onclick="startLoading('Casual Use')">
+            🍿 {{ t("Casual Use") }}
+        </div>
+
+        <div class="option-button" onclick="startLoading('Animation/VFX/Game Dev')">
+            🎨 {{ t("Animation / VFX / Game Dev") }}
+        </div>
+
+        <form id="usecaseForm" method="POST" action="/results">
+            <input type="hidden" name="category" value="{{ category }}">
+            <input type="hidden" name="budget" value="{{ budget }}">
+            <input type="hidden" name="use_case" id="usecaseInput">
+        </form>
+
+    </div>
+</div>
+
+<!-- Neon Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+        <h2>Analyzing Performance...</h2>
+        <div class="neon-bar">
+            <div class="neon-progress"></div>
+        </div>
+        <p>Building Optimized Configuration</p>
+    </div>
+</div>
+
+<script>
+function startLoading(value) {
+    document.getElementById("usecaseInput").value = value;
+
+    const loading = document.getElementById("loadingScreen");
+    loading.style.display = "flex";
+
+    setTimeout(() => {
+        document.getElementById("usecaseForm").submit();
+    }, 1800);
+}
+</script>
+
+{% endblock %}

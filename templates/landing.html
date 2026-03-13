@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <div class="glass-box">
+
+        <!-- Trending -->
+        <div class="trending-section">
+            <div class="trending-title">
+                🔥 {{ t("Trending Hardware") }}
+            </div>
+
+            <div class="trending-row">
+
+                <div class="trending-card">
+                    <h3>RTX 4090</h3>
+                    <p>{{ t("Ultimate 4K Gaming GPU") }}</p>
+                </div>
+
+                <div class="trending-card">
+                    <h3>Ryzen 9 7950X</h3>
+                    <p>{{ t("High-End 16 Core CPU") }}</p>
+                </div>
+
+                <div class="trending-card">
+                    <h3>RTX 4070 Super</h3>
+                    <p>{{ t("Best 1440p GPU") }}</p>
+                </div>
+
+                <div class="trending-card">
+                    <h3>RX 7900 XTX</h3>
+                    <p>{{ t("AMD Flagship GPU") }}</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <h1 class="hero-title">
+            {{ t("Build Your Ultimate Machine") }}
+        </h1>
+
+        <p class="hero-subtitle">
+            {{ t("AI-powered PC and Laptop recommendations optimized for Gaming, Editing, and Creative Workflows.") }}
+        </p>
+
+        <button class="cyber-btn" onclick="openModal()">
+           {{ t("Get Started") }}
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<div id="authModal" class="modal-overlay">
+    <div class="modal-box">
+        <h3>{{ t("Sign in to Continue") }}</h3>
+
+        <a href="/login" class="google-btn">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+            {{ t("Continue with Google") }}
+        </a>
+
+        <div class="close-btn" onclick="closeModal()">
+            {{ t("Cancel") }}
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal() {
+    document.getElementById("authModal").style.display = "flex";
+}
+function closeModal() {
+    document.getElementById("authModal").style.display = "none";
+}
+</script>
+
+{% endblock %}
