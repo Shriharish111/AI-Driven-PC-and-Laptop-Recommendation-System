@@ -4,11 +4,13 @@ load_dotenv()
 from flask import Flask, app
 from config import Config
 from extensions import db
+from werkzeug.middleware.proxy_fix import ProxyFix
 from utils.language import translate
 
 os.environ["LOKY_MAX_CPU_COUNT"] = "4"
 def create_app():
     app = Flask(__name__)
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
     database_url = os.getenv("DATABASE_URL")
 
